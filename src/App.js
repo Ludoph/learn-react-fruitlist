@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function App() {
   //State (état, données)
@@ -7,6 +7,8 @@ function App() {
     { id: 2, nom: "Banane" },
     { id: 3, nom: "Cerise" },
   ]);
+  // const inputRef = useRef(); //methode 1
+  const [nouveauFruit, setNouveauFruit] = useState("");
 
   //Comportements
   const handleDelette = (id) => {
@@ -19,6 +21,20 @@ function App() {
 
     //3. modifier mon state avec le setter
     setFruits(fruitsCopyUpdated);
+  };
+
+  const handleSubmit = (Event) => {
+    Event.preventDefault();
+    const fruitsCopy = [...fruits];
+    const id = new Date().getTime();
+    const nom = nouveauFruit;
+    fruitsCopy.push({ id: id, nom: nom });
+    setFruits(fruitsCopy);
+    setNouveauFruit("");
+  };
+
+  const handleChange = (event) => {
+    setNouveauFruit(event.target.value);
   };
 
   //Affichage (render)
@@ -35,8 +51,24 @@ function App() {
           );
         })}
       </ul>
+      <form action="submit" onSubmit={handleSubmit}>
+        <input
+          value={nouveauFruit}
+          type="text"
+          placeholder="Ajouter un fruit"
+          onChange={handleChange}
+        />
+        <button>Ajouter + </button>
+      </form>
     </div>
   );
 }
 
 export default App;
+
+//Gestion du formulaire
+//1. creation du formulaire
+//2. soumission du formulaire (onSubmit handleSubmit)
+//3. collecte des données
+//3a. methode 1 : documetGetElementByID "React" (useRef)
+//3b. methode 2 :  synchro descendante ascendante (onChange handleChange)
