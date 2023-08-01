@@ -33,6 +33,10 @@ function App() {
     setFruits(fruitsCopy);
   };
 
+  const afficherFruitFPrefere = (fruitNom) => {
+    alert(`j'aime trop ce fruit : ${fruitNom}`);
+  };
+
   // -------------AFFICHAGE (render)
   return (
     <div>
@@ -41,7 +45,8 @@ function App() {
         {fruits.map((fruit) => (
           <Fruit
             fruitInfo={fruit}
-            onFruitDelete={handleDelete}
+            addFavClick={() => afficherFruitFPrefere(fruit.nom)}
+            delFruitClick={() => handleDelete(fruit.id)}
             key={fruit.id}
           />
         ))}

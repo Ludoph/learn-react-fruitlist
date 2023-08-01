@@ -1,4 +1,4 @@
-export default function Fruit({ fruitInfo, onFruitDelete }) {
+export default function Fruit({ fruitInfo, delFruitClick, addFavClick }) {
   //State
   // const fruitInfo = props.fruitInfo;
   // const onFruitDelete = props.onFruitDelete;
@@ -9,8 +9,8 @@ export default function Fruit({ fruitInfo, onFruitDelete }) {
   return (
     <li>
       {fruitInfo.nom}
-      {""}
-      <button onClick={() => onFruitDelete(fruitInfo.id)}>X</button>
+      <button onClick={addFavClick}>❤️</button>
+      <button onClick={delFruitClick}>❌</button>
     </li>
   );
 }
